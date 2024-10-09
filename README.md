@@ -8,7 +8,7 @@ This repository contains the code and other technical details related to **i_Shr
 - Pixhawk 2.0
 - Raspberry Pi 4
 - Pi Camera V2
-- Thrusters
+- T200 Thrusters
 - Power Distribution (PD) Board
 - PH Sensor
 - Non-Destructive Testing (NDT) Sensor
