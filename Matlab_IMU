@@ -1,0 +1,42 @@
+% MATLAB code to plot 3D IMU data from Arduino Uno
+
+% Open serial connection to Arduino
+s = serial('COMx', 'BaudRate', 9600); % Replace 'COMx' with your Arduino port
+fopen(s);
+
+% Number of data points to plot
+numPoints = 100;
+
+% Initialize arrays
+data = zeros(numPoints, 3);
+
+% Create figure for 3D plot
+figure;
+h = plot3(data(:, 1), data(:, 2), data(:, 3), '-o');
+xlabel('X-axis');
+ylabel('Y-axis');
+zlabel('Z-axis');
+title('IMU Data Plot');
+grid on;
+
+% Main loop for reading and plotting data
+for i = 1:numPoints
+    % Read data from Arduino
+    line = fgetl(s);
+    values = str2double(strsplit(line, ','));
+
+    % Update data array
+    data(i, :) = values;
+
+    % Update plot
+    set(h, 'XData', data(:, 1), 'YData', data(:, 2), 'ZData', data(:, 3));
+    drawnow;
+
+    % Optional: Adjust the pause time based on your data rate
+    pause(0.1);
+end
+
+% Close serial connection
+fclose(s);
+delete(s);
+clear s;
